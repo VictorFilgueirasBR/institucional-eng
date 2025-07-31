@@ -1,0 +1,174 @@
+.hero-slides {
+  position: relative;
+  overflow: hidden;
+  gap: 20px;
+  padding: 1rem 1rem 3rem 1rem;
+  max-height: 70vh;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+
+  .slides-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    gap: 20px;
+    max-height: 60vh;
+  }
+
+  .slide {
+    min-width: 100%;
+    position: relative;
+    max-height: 60vh;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.37);
+
+    img {
+      width: 100%;
+      height: 100%;
+      max-height: 60vh;
+      object-fit: cover;
+      border-radius: 20px;
+      filter: brightness(0.7);
+    }
+
+    h1, h2 {
+      position: absolute;
+      left: 2rem;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      z-index: 2;
+      max-width: 80%;
+      text-align: left;
+
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    h1 {
+      bottom: 4rem;
+      font-size: 3rem;
+      font-weight: bold;
+      animation-delay: 0.3s;
+    }
+
+    h2 {
+      bottom: 2rem;
+      font-size: 1rem;
+      font-weight: 400;
+      animation-delay: 0.6s;
+    }
+
+    // 🔄 Shine automático
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      animation: shine-slide 1s linear infinite;
+      z-index: 1;
+    }
+  }
+
+  @keyframes shine-slide {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // 🔹 Botões de navegação
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.527);
+    cursor: pointer;
+    z-index: 4;
+    padding: 0 1rem;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &.prev {
+      left: 0;
+    }
+
+    &.next {
+      right: 0;
+    }
+  }
+
+  // 🔹 Paginação
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+
+    .bullet {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(216, 216, 216, 0.233);
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+
+      &.active {
+        background-color: rgba(156, 156, 156, 0.678);
+        transform: scale(1.2);
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+
+  // 🔹 Responsividade
+  @media (max-width: 768px) {
+    .slide {
+      h1 {
+        font-size: 2rem;
+        bottom: 3rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        bottom: 1.5rem;
+      }
+    }
+
+    .nav-button {
+      font-size: 2rem;
+    }
+  }
+}
